@@ -4,7 +4,7 @@
   >
     <div class="flex items-center text-xl flex-1">
       <span class="text-[--action-primary]">
-        <IconLogo class="max-w-12"/>
+        <IconLogo class="max-w-12" />
       </span>
     </div>
 

@@ -9,46 +9,6 @@ import FlagIcon from "./icons/FlagIcon.vue";
 <template>
   <AboutItem>
     <template #icon>
-      <FlagIcon />
-    </template>
-    <template #heading>{{ $t("about.me.title") }}</template>
-    <span>{{ $t("about.me.text") }}</span>
-  </AboutItem>
-  <AboutItem>
-    <template #icon>
-      <GraduatedIcon />
-    </template>
-    <template #heading>{{ $t("about.graduation.title") }}</template>
-
-    <i18n-t keypath="about.graduation.text" tag="span">
-      <template #graduationName>
-        <a href="https://ifrs.edu.br/bento/" target="_blank" rel="noopener">
-          {{ $t("about.graduation.campusName") }}
-        </a>
-      </template>
-    </i18n-t>
-  </AboutItem>
-
-  <AboutItem>
-    <template #icon>
-      <IconDocumentation />
-    </template>
-    <template #heading>{{ $t("about.postgraduate.title") }}</template>
-
-    <i18n-t keypath="about.postgraduate.text" tag="span">
-      <template #postgraduateName>
-        <a
-          href="https://www.linkedin.com/school/fiap/"
-          target="_blank"
-          rel="noopener"
-          >{{ $t("about.postgraduate.name") }}</a
-        >
-      </template>
-    </i18n-t>
-  </AboutItem>
-
-  <AboutItem>
-    <template #icon>
       <ToolingIcon />
     </template>
     <template #heading>{{ $t("about.work.title") }}</template>
@@ -72,5 +32,41 @@ import FlagIcon from "./icons/FlagIcon.vue";
         >
       </template>
     </i18n-t>
+  </AboutItem>
+  <AboutItem>
+    <template #icon>
+      <GraduatedIcon />
+    </template>
+    <template #heading>{{ $t("about.graduation.title") }}</template>
+    <i18n-t keypath="about.graduation.text" tag="span">
+      <template #graduationName>
+        <a href="https://ifrs.edu.br/bento/" target="_blank" rel="noopener">
+          {{ $t("about.graduation.campusName") }}
+        </a>
+      </template>
+    </i18n-t>
+  </AboutItem>
+  <AboutItem>
+    <template #icon>
+      <IconDocumentation />
+    </template>
+    <template #heading>{{ $t("about.postgraduate.title") }}</template>
+    <i18n-t keypath="about.postgraduate.text" tag="span">
+      <template #postgraduateName>
+        <a
+          href="https://www.linkedin.com/school/fiap/"
+          target="_blank"
+          rel="noopener"
+          >{{ $t("about.postgraduate.name") }}</a
+        >
+      </template>
+    </i18n-t>
+  </AboutItem>
+  <AboutItem>
+    <template #icon>
+      <FlagIcon />
+    </template>
+    <template #heading>{{ $t("about.me.title") }}</template>
+    <span>{{ $t("about.me.text") }}</span>
   </AboutItem>
 </template>
