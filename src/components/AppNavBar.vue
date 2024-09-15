@@ -4,7 +4,7 @@
   >
     <div class="flex items-center text-xl flex-1">
       <span class="text-[--action-primary]">
-        <IconLogo />
+        <IconLogo class="max-w-12"/>
       </span>
     </div>
 
@@ -36,7 +36,7 @@
     </div>
 
     <ActionButton
-      class="md:hidden block absolute right-4 top-4"
+      class="md:hidden block absolute right-4 top-4 max-w-12"
       :iconComponent="open ? IconClose : MobileMenuIcon"
       color="[--action-primary]"
       @click="toggleOpen"

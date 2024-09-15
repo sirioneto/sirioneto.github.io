@@ -1,6 +1,6 @@
 <template>
-  <div class="button-container">
-    <button :class="buttonVariantClass" :disabled="disabled">
+  <div :class="buttonVariantClass" class="shadow-sm button-container">
+    <button :disabled="disabled">
       <i :title="title" :class="`text-${color}`">
         <component :is="iconComponent" />
       </i>
@@ -31,9 +31,9 @@ export default {
   },
   setup(props) {
     const buttonVariantClass = computed(() => {
-      let buttonClass = "button";
+      let buttonClass = "hover:shadow-[--focus-primary]";
       if (props.variant == "danger") {
-        buttonClass += " danger";
+        buttonClass += " shadow-red-50";
       }
 
       return buttonClass;
@@ -54,7 +54,6 @@ export default {
   padding: 4px 6px;
   background: inherit;
   color: var(--color-text);
-  box-shadow: 0px 0px 8px 1px var(--color-border);
   font-size: 16px;
   font-family:
     Inter,
@@ -72,12 +71,10 @@ export default {
 }
 
 .button-container > button:not(:disabled):hover {
-  box-shadow: 0px 0px 8px 1px var(--focus-primary);
   color: var(--text-primary);
 }
 
 .button-container > button.danger:not(:disabled):hover {
-  box-shadow: 0px 0px 8px 1px red;
   color: var(--text-primary);
 }
 

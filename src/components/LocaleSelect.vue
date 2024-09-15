@@ -4,7 +4,7 @@
     id="locale"
     v-model="locale"
     @change="changeSelectedLocale"
-    class="w-24 h-10 bg-[--color-background-soft] shadow-sm shadow-[--color-border] text-center"
+    class="hover:shadow-[--focus-primary] w-32 h-8 px-1 text-sm bg-[--color-background-soft] shadow-sm text-center"
   >
     <option
       v-for="language in availableLanguages"
