@@ -35,7 +35,7 @@ export const pt_BR = {
     },
     work: {
       title: "Trabalhando",
-      text: "Atualmente, trabalho como desenvolvedor full stack na empresa {company}, onde atuo como referência técnica no time responsável pela internacionalização (I18N e L10N) do produto, para região do {region}. Além disso, dedico tempo ao desenvolvimento de {projects}.",
+      text: "Desenvolvedor Fullstack Pleno, contribui para a iniciativa de internacionalização (I18N e L10N) da {company}, lançando o produto na {region}. Atualmente, estou envolvido na iniciativa de escalabilidade tecnológica do sistema, com foco na otimização e inovação do produto. Trabalho na implementação de arquiteturas de microsserviços e sistemas orientados a eventos, buscando aprimorar a performance e a eficiência do produto. Além disso, dedico tempo ao desenvolvimento de {projects}.",
       company: "Bling ERP",
       region: "México",
       projects: "Projetos pessoais",
