@@ -35,7 +35,7 @@ export const en = {
     },
     work: {
       title: "Working",
-      text: "Mid-Level Fullstack Developer, contributed to the internationalization (I18N and L10N) initiative at {company}, launching the product in {region}. Currently, I am involved in the technological scaling initiative of the system, focusing on product optimization and innovation. I work on implementing microservices architectures and event-driven systems, aiming to enhance the product's performance and efficiency. Additionally, I dedicate time to the development of {projects}.",
+      text: "Mid-Level Fullstack Developer, I contributed to the internationalization (I18N and L10N) initiative at {company}, launching the product in {region}. Currently, I am involved in the technological scaling initiative of the system, focusing on product optimization and innovation. I work on implementing microservices architectures and event-driven systems, aiming to enhance the product's performance and efficiency. Additionally, I dedicate time to the development of {projects}.",
       company: "Bling ERP",
       region: "Mexico",
       projects: "Personal projects",
