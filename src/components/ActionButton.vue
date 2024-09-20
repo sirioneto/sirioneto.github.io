@@ -2,7 +2,7 @@
   <div :class="buttonVariantClass" class="shadow-sm button-container">
     <button :disabled="disabled">
       <i :title="title" :class="`text-${color}`">
-        <component :is="iconComponent" />
+        <component :is="iconComponent" v-if="iconComponent" />
       </i>
       <span v-if="text" :class="`text-${color}`">{{ text }}</span>
     </button>
@@ -15,9 +15,18 @@ import { computed } from "vue";
 export default {
   props: {
     disabled: Boolean,
-    iconComponent: Object,
-    title: String,
-    text: String,
+    iconComponent: {
+      type: Object,
+      default: null,
+    },
+    title: {
+      type: String,
+      default: "",
+    },
+    text: {
+      type: String,
+      default: "",
+    },
     color: {
       type: String,
       default: "[--color-text]",
@@ -25,8 +34,9 @@ export default {
     variant: {
       type: String,
       validator(value: string) {
-        return ["danger"].includes(value);
+        return ["danger", "primary"].includes(value);
       },
+      default: "primary",
     },
   },
   setup(props) {

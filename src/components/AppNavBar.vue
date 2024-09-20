@@ -37,7 +37,7 @@
 
     <ActionButton
       class="md:hidden block absolute right-4 top-4 max-w-12"
-      :iconComponent="open ? IconClose : MobileMenuIcon"
+      :icon-component="open ? IconClose : MobileMenuIcon"
       color="[--action-primary]"
       @click="toggleOpen"
     />

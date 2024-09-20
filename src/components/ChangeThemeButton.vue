@@ -1,9 +1,9 @@
 <template>
   <div class="theme-container">
     <ActionButton
-      :iconComponent="themeConfig.icon"
-      @click="toggleTheme"
+      :icon-component="themeConfig.icon"
       :title="$t(themeConfig.text)"
+      @click="toggleTheme"
     />
   </div>
 </template>

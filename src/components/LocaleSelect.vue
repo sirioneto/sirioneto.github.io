@@ -1,10 +1,10 @@
 <template>
   <select
-    name="locale"
     id="locale"
     v-model="locale"
-    @change="changeSelectedLocale"
+    name="locale"
     class="hover:shadow-[--focus-primary] w-32 h-8 px-1 text-sm bg-[--color-background-soft] shadow-sm text-center"
+    @change="changeSelectedLocale"
   >
     <option
       v-for="language in availableLanguages"
