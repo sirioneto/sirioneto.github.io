@@ -51,7 +51,7 @@ export const pt_BR = {
       instagram: "Instagram",
     },
     mail: {
-      subject: "Interessado em Colaboração - Portfolio Gitlab Page",
+      subject: "Interessado em Colaboração",
       body: "Olá! Estou interessado em explorar oportunidades de colaboração ou possíveis projetos em que possamos trabalhar juntos.",
     },
   },
