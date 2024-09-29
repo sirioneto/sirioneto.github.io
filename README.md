@@ -1,5 +1,4 @@
-![Deploy Status](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/deploy.yml/badge.svg)
-
+[![Deploy Status](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/deploy.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sirioneto_sirioneto.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sirioneto_sirioneto.github.io)
 
 
