@@ -3,9 +3,9 @@
     class="xl:z-10 bg-[--color-background-mute] w-full py-3.5 px-6 shadow md:flex justify-between items-center fixed z-20 min-h-20"
   >
     <div class="flex items-center text-xl flex-1">
-      <span class="text-[--action-primary]">
+      <RouterLink key="/" to="/" class="text-[--action-primary]">
         <IconLogo class="max-w-12" />
-      </span>
+      </RouterLink>
     </div>
 
     <nav
