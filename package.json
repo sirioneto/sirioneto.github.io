@@ -14,10 +14,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@amineyarman/kinesis": "^1.0.4",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-i18n": "^9.10.2",
-    "vue-kinesis": "^2.0.5",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

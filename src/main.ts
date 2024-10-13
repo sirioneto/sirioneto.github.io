@@ -6,7 +6,9 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import { initializeI18n } from "./i18n";
+import { initializeKinesis } from "@amineyarman/kinesis";
 
+initializeKinesis();
 const app = createApp(App);
 const i18n = initializeI18n();
 

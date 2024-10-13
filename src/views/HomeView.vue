@@ -1,26 +1,43 @@
 <template>
   <div>
     <div class="xl:flex-row flex flex-col justify-center items-center">
-      <KinesisContainer class="xl:text-left text-center w-full mt-12 mb-4">
+      <div
+        data-kinesistransformer
+        class="xl:text-left text-center w-full mt-12 mb-4"
+      >
         <div class="flex flex-col mb-8 gap-2">
-          <KinesisElement type="translate" :strength="-10" class="text-2xl">{{
-            $t("home.salutation.hello")
-          }}</KinesisElement>
-          <KinesisElement
-            type="translate"
-            :strength="10"
-            class="xl:text-5xl text-4xl"
-            >{{ $t("home.salutation.me") }}</KinesisElement
+          <div
+            data-kinesistransformer-element
+            data-ks-transform="translate"
+            :data-ks-strength="-10"
+            class="text-2xl"
           >
-          <KinesisElement
-            type="translate"
-            :strength="-10"
+            {{ $t("home.salutation.hello") }}
+          </div>
+          <div
+            data-kinesistransformer-element
+            data-ks-transform="translate"
+            :data-ks-strength="10"
             class="xl:text-5xl text-4xl"
-            >{{ $t("home.salutation.profession") }}</KinesisElement
           >
-          <KinesisElement type="translate" :strength="10" class="text-2xl">{{
-            $t("home.salutation.welcome")
-          }}</KinesisElement>
+            {{ $t("home.salutation.me") }}
+          </div>
+          <div
+            data-kinesistransformer-element
+            data-ks-transform="translate"
+            :data-ks-strength="-10"
+            class="xl:text-5xl text-4xl"
+          >
+            {{ $t("home.salutation.profession") }}
+          </div>
+          <div
+            data-kinesistransformer-element
+            data-ks-transform="translate"
+            :data-ks-strength="10"
+            class="text-2xl"
+          >
+            {{ $t("home.salutation.welcome") }}
+          </div>
         </div>
         <RouterLink
           to="/about"
@@ -28,12 +45,12 @@
         >
           {{ $t("home.salutation.moreAboutMe") }}
         </RouterLink>
-      </KinesisContainer>
-      <KinesisContainer class="w-full">
-        <KinesisElement :strength="20" type="depth">
+      </div>
+      <div data-kinesisdepth class="w-full">
+        <div data-kinesisdepth-element :data-ks-depth="20">
           <IconDeveloper />
-        </KinesisElement>
-      </KinesisContainer>
+        </div>
+      </div>
     </div>
     <div class="xl:mt-24 flex-row flex justify-center items-center gap-8">
       <a
@@ -68,7 +85,6 @@
 </template>
 
 <script setup lang="ts">
-import { KinesisContainer, KinesisElement } from "vue-kinesis";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import IconDeveloper from "@/components/icons/IconDeveloper.vue";
