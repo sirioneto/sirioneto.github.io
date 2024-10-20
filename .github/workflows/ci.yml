@@ -101,7 +101,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}  # Push changes to the current branch
 
-  # Job for uploading coverage reports to SonarCloud
   sonarcloud-analysis:
     runs-on: ubuntu-latest
     needs: coverage
@@ -109,7 +108,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1  # Only fetch the latest commit
+          fetch-depth: 1
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -117,21 +116,22 @@ jobs:
           node-version: '20.11.1'
 
       - name: Install dependencies
-        run: npm ci  # Use npm ci for faster, reliable installs
+        run: npm ci
 
       - name: Download Coverage Report Artifact
         uses: actions/download-artifact@v3
         with:
           name: coverage-report
 
-      - name: Upload Coverage Report to SonarCloud
-        run: |
-          echo "Starting SonarCloud analysis..."
-          sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info  # Specify coverage report path
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.sources=.
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarCloud token for authentication
