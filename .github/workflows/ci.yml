@@ -123,6 +123,9 @@ jobs:
         with:
           name: coverage-report
 
+      - name: List Coverage Directory
+        run: ls -la coverage
+
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         with:
@@ -133,8 +136,8 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarCloud token for authentication
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   # Job for building the application
   build:
