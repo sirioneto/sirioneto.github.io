@@ -1,5 +1,6 @@
 name: Continuous Integration
 
+# This workflow is triggered on push, pull request events, and manual dispatch.
 on:
   push:
     branches:
@@ -9,26 +10,21 @@ on:
       - '*'
   workflow_dispatch:
 
+# Setting permissions for the workflow
 permissions:
-  contents: read
-  id-token: write
+  contents: read  # Allows read access to the repository's contents
+  id-token: write  # Allows write access for ID tokens
 
 jobs:
-  checkout:
-    runs-on: ubuntu-latest
-    outputs:
-      repo-path: ${{ steps.checkout.outputs.repo-path }}
-    steps:
-      - name: Checkout code
-        id: checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
+  # Job for linting the code and checking security vulnerabilities
   lint-and-security:
     runs-on: ubuntu-latest
-    needs: checkout
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for all branches
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
@@ -38,23 +34,29 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}  # Cache key based on OS and package-lock
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-  # Restore keys for cache misses
 
       - name: Install dependencies
         run: npm install
 
       - name: Run linter
-        run: npm run lint
+        run: npm run lint  # Execute the linter to check code style
 
       - name: Audit npm dependencies for vulnerabilities
-        run: npm audit --production
+        run: npm audit --production  # Check for security vulnerabilities in dependencies
 
+  # Job for running tests and generating coverage reports
   coverage:
     runs-on: ubuntu-latest
     needs: lint-and-security
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for tests
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
@@ -64,18 +66,18 @@ jobs:
         run: npm install
 
       - name: Run Tests with Coverage
-        run: npm run test -- --coverage
+        run: npm run test -- --coverage  # Execute tests and generate coverage reports
 
       - name: Generate Coverage Badge
         uses: tj-actions/coverage-badge-go@v2
         with:
-          filename: coverage/lcov.info
+          filename: coverage/lcov.info  # Specify the coverage report file
 
       - name: Verify Changed Files
         uses: tj-actions/verify-changed-files@v16
         id: verify-changed-files
         with:
-          files: README.md
+          files: README.md  # Check if README.md has changed
 
       - name: Commit Coverage Badge to README
         if: steps.verify-changed-files.outputs.files_changed == 'true'
@@ -83,19 +85,25 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
-          git commit -m "chore: Updated coverage badge."
+          git commit -m "chore: Updated coverage badge."  # Commit the updated badge if README changed
 
       - name: Push Coverage Badge Update
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: ${{ github.ref }}  # Push changes to the current branch
 
+  # Job for uploading coverage reports to SonarCloud
   sonarcloud-analysis:
     runs-on: ubuntu-latest
     needs: coverage
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for analysis
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
@@ -112,15 +120,21 @@ jobs:
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.sources=.
             -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info  # Specify coverage report path
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # SonarCloud token for authentication
 
+  # Job for building the application
   build:
     runs-on: ubuntu-latest
     needs: sonarcloud-analysis
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for building
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
@@ -136,4 +150,4 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: build
-          path: dist
+          path: dist  # Specify the path to the build artifacts
