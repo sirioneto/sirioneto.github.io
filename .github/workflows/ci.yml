@@ -1,6 +1,5 @@
 name: Continuous Integration
 
-# This workflow is triggered on push, pull request events, and manual dispatch.
 on:
   push:
     branches:
@@ -10,20 +9,16 @@ on:
       - '*'
   workflow_dispatch:
 
-# Setting permissions for the workflow
 permissions:
-  contents: write  # Allows read access to the repository's contents
-  id-token: write  # Allows write access for ID tokens
+  contents: write
+  id-token: write
 
 jobs:
-  # Job for linting the code and checking security vulnerabilities
   lint-and-security:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1  # Only fetch the latest commit
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -31,23 +26,20 @@ jobs:
           node-version: '20.11.1'
 
       - name: Install dependencies
-        run: npm ci  # Use npm ci for faster, reliable installs
+        run: npm ci
 
       - name: Run linter
-        run: npm run lint  # Execute the linter to check code style
+        run: npm run lint
 
       - name: Audit npm dependencies for vulnerabilities
-        run: npm audit --production  # Check for security vulnerabilities in dependencies
+        run: npm audit --production
 
-  # Job for running tests and generating coverage reports
   coverage:
     runs-on: ubuntu-latest
     needs: lint-and-security
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1  # Only fetch the latest commit
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -55,15 +47,18 @@ jobs:
           node-version: '20.11.1'
 
       - name: Install dependencies
-        run: npm ci  # Use npm ci for faster, reliable installs
+        run: npm ci
 
       - name: Run Tests with Coverage
         run: npm run test:coverage
 
+      - name: List Coverage Directory
+        run: ls -la coverage
+
       - name: Generate Coverage Badge
         uses: tj-actions/coverage-badge-go@v2
         with:
-          filename: coverage/lcov.info  # Specify the coverage report file, defined on vitest.config.ts
+          filename: coverage/lcov.info
 
       - name: Upload Coverage Report as Artifact
         uses: actions/upload-artifact@v3
@@ -71,7 +66,6 @@ jobs:
           name: coverage-report
           path: coverage/
 
-  # Job for commit tests coverage badge on README.md
   coverage-badge:
     runs-on: ubuntu-latest
     needs: coverage
@@ -84,7 +78,7 @@ jobs:
         uses: tj-actions/verify-changed-files@v16
         id: verify-changed-files
         with:
-          files: README.md  # Check if README.md has changed
+          files: README.md
 
       - name: Commit Coverage Badge to README
         if: steps.verify-changed-files.outputs.files_changed == 'true'
@@ -99,7 +93,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}  # Push changes to the current branch
+          branch: main
 
   sonarcloud-analysis:
     runs-on: ubuntu-latest
@@ -107,8 +101,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -139,15 +131,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  # Job for building the application
   build:
     runs-on: ubuntu-latest
     needs: sonarcloud-analysis
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1  # Only fetch the latest commit
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -155,13 +144,13 @@ jobs:
           node-version: '20.11.1'
 
       - name: Install dependencies
-        run: npm ci  # Use npm ci for faster, reliable installs
+        run: npm ci
 
       - name: Build application with Vite
-        run: npm run build  # Build the application
+        run: npm run build
 
       - name: Upload artifact for GitHub Pages deployment
         uses: actions/upload-pages-artifact@v3
         with:
           name: build
-          path: dist  # Specify the path to the build artifacts
+          path: dist
