@@ -1,4 +1,5 @@
-[![Deploy Status](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/deploy.yml)
+[![Continuous Integration Status](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/ci.yml)
+[![Continuous Deploy Status](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/cd.yml/badge.svg)](https://github.com/sirioneto/sirioneto.github.io/actions/workflows/cd.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sirioneto_sirioneto.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sirioneto_sirioneto.github.io)
 
 
