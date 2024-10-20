@@ -12,7 +12,7 @@ on:
 
 # Setting permissions for the workflow
 permissions:
-  contents: read  # Allows read access to the repository's contents
+  contents: write  # Allows read access to the repository's contents
   id-token: write  # Allows write access for ID tokens
 
 jobs:
