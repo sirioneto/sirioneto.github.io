@@ -58,12 +58,12 @@ jobs:
         run: npm ci  # Use npm ci for faster, reliable installs
 
       - name: Run Tests with Coverage
-        run: npm run test:unit -- --coverage  # Execute tests and generate coverage reports
+        run: npm run test:coverage
 
       - name: Generate Coverage Badge
         uses: tj-actions/coverage-badge-go@v2
         with:
-          filename: coverage/lcov.info  # Specify the coverage report file
+          filename: coverage/lcov.info  # Specify the coverage report file, defined on vitest.config.ts
 
       - name: Verify Changed Files
         uses: tj-actions/verify-changed-files@v16
